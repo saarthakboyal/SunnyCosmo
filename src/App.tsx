@@ -1,4 +1,5 @@
 export default function App() {
+  const isMobile = window.innerWidth <= 768;
   document.body.style.margin = "0";
   document.body.style.padding = "0";
   document.body.style.backgroundColor = "#000000";
@@ -42,7 +43,7 @@ export default function App() {
           <a
             href="#home"
             style={{
-              marginLeft: "200px",
+              marginLeft: isMobile ? "20px" : "200px",
             }}
           >
             <img
@@ -61,7 +62,7 @@ export default function App() {
               display: "flex",
               gap: "18px",
               alignItems: "center",
-              marginRight: "200px",
+              marginRight: isMobile ? "20px" : "200px",
             }}
           >
             <a
@@ -160,10 +161,10 @@ export default function App() {
             className="typing-text"
             style={{
               position: "absolute",
-              bottom: "200px",
+              bottom: isMobile ? "120px" : "200px",
               right: "60px",
               color: "#000000",
-              fontSize: "28px",
+              fontSize: isMobile ? "18px" : "28px",
               fontStyle: "italic",
               fontFamily: '"Great Vibes", cursive',
               fontWeight: 500,
@@ -198,7 +199,7 @@ export default function App() {
         >
           <div
             style={{
-              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
               flexWrap: "wrap",
               justifyContent: "space-between",
               alignItems: "center",
@@ -208,7 +209,7 @@ export default function App() {
             <div style={{ flex: 1, minWidth: "280px" }}>
               <h1
                 style={{
-                  fontSize: "52px",
+                  fontSize: isMobile ? "34px" : "52px",
                   marginBottom: "20px",
                   lineHeight: "1.1",
                 }}
@@ -345,7 +346,7 @@ export default function App() {
               style={{
                 position: "absolute",
                 top: "50%",
-                left: "75%",
+                left: isMobile ? "50%" : "75%",
                 transform: "translate(-50%, -50%)",
                 background: "#000000",
                 color: "#ffffff",
@@ -354,7 +355,7 @@ export default function App() {
                 fontWeight: 900,
                 letterSpacing: "2px",
                 borderRadius: "10px",
-                fontSize: "28px",
+                fontSize: isMobile ? "16px" : "28px",
                 border: "2px solid #ffffff",
                 whiteSpace: "nowrap",
               }}
@@ -372,7 +373,7 @@ export default function App() {
           background: "#000000",
           padding: "120px 40px 80px",
           boxSizing: "border-box",
-          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "center",
         }}
       >
@@ -390,7 +391,7 @@ export default function App() {
           <div style={{ flex: 1, minWidth: "320px" }}>
             <h2
               style={{
-                fontSize: "72px",
+                fontSize: isMobile ? "42px" : "72px",
                 lineHeight: "1",
                 marginBottom: "50px",
                 color: "#ffffff",
