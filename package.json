@@ -32,3 +32,6 @@
     "not op_mini all"
   ]
 }
+"engines": {
+  "node": "18.x"
+}
