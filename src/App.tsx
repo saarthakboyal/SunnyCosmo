@@ -1,5 +1,4 @@
 export default function App() {
-  const isMobile = window.innerWidth <= 768;
   document.body.style.margin = "0";
   document.body.style.padding = "0";
   document.body.style.backgroundColor = "#000000";
@@ -43,7 +42,7 @@ export default function App() {
           <a
             href="#home"
             style={{
-              marginLeft: isMobile ? "20px" : "200px",
+              marginLeft: "200px",
             }}
           >
             <img
@@ -62,7 +61,7 @@ export default function App() {
               display: "flex",
               gap: "18px",
               alignItems: "center",
-              marginRight: isMobile ? "20px" : "200px",
+              marginRight: "200px",
             }}
           >
             <a
@@ -161,10 +160,10 @@ export default function App() {
             className="typing-text"
             style={{
               position: "absolute",
-              bottom: isMobile ? "120px" : "200px",
+              bottom: "200px",
               right: "60px",
               color: "#000000",
-              fontSize: isMobile ? "18px" : "28px",
+              fontSize: "28px",
               fontStyle: "italic",
               fontFamily: '"Great Vibes", cursive',
               fontWeight: 500,
@@ -199,7 +198,7 @@ export default function App() {
         >
           <div
             style={{
-              flexDirection: isMobile ? "column" : "row",
+              display: "flex",
               flexWrap: "wrap",
               justifyContent: "space-between",
               alignItems: "center",
@@ -209,7 +208,7 @@ export default function App() {
             <div style={{ flex: 1, minWidth: "280px" }}>
               <h1
                 style={{
-                  fontSize: isMobile ? "34px" : "52px",
+                  fontSize: "52px",
                   marginBottom: "20px",
                   lineHeight: "1.1",
                 }}
@@ -346,7 +345,7 @@ export default function App() {
               style={{
                 position: "absolute",
                 top: "50%",
-                left: isMobile ? "50%" : "75%",
+                left: "75%",
                 transform: "translate(-50%, -50%)",
                 background: "#000000",
                 color: "#ffffff",
@@ -355,7 +354,7 @@ export default function App() {
                 fontWeight: 900,
                 letterSpacing: "2px",
                 borderRadius: "10px",
-                fontSize: isMobile ? "16px" : "28px",
+                fontSize: "28px",
                 border: "2px solid #ffffff",
                 whiteSpace: "nowrap",
               }}
@@ -373,7 +372,7 @@ export default function App() {
           background: "#000000",
           padding: "120px 40px 80px",
           boxSizing: "border-box",
-          flexDirection: isMobile ? "column" : "row",
+          display: "flex",
           justifyContent: "center",
         }}
       >
@@ -391,7 +390,7 @@ export default function App() {
           <div style={{ flex: 1, minWidth: "320px" }}>
             <h2
               style={{
-                fontSize: isMobile ? "42px" : "72px",
+                fontSize: "72px",
                 lineHeight: "1",
                 marginBottom: "50px",
                 color: "#ffffff",
@@ -524,9 +523,9 @@ export default function App() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              textAlign: "center",
               justifyContent: "center",
               width: "100%",
-              textAlign: "center",
             }}
           >
             <img
@@ -628,3 +627,4 @@ export default function App() {
     </div>
   );
 }
+
