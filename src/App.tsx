@@ -1,4 +1,6 @@
 export default function App() {
+  const isMobile = window.innerWidth <= 768;
+
   document.body.style.margin = "0";
   document.body.style.padding = "0";
   document.body.style.backgroundColor = "#000000";
@@ -21,7 +23,7 @@ export default function App() {
           height: "100vh",
           backgroundImage: "url('/background.png?v=2')",
           backgroundSize: "cover",
-          backgroundPosition: "center 20%",
+          backgroundPosition: isMobile ? "center center" : "center 20%",
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -35,21 +37,23 @@ export default function App() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "25px 50px",
+            padding: isMobile ? "20px" : "25px 50px",
             boxSizing: "border-box",
+            flexWrap: "wrap",
+            gap: isMobile ? "20px" : "0",
           }}
         >
           <a
             href="#home"
             style={{
-              marginLeft: "200px",
+              marginLeft: isMobile ? "0" : "200px",
             }}
           >
             <img
               src="/logo.png"
               alt="Sunny Cosmo Logo"
               style={{
-                height: "82px",
+                height: isMobile ? "60px" : "82px",
                 width: "auto",
                 display: "block",
               }}
@@ -61,7 +65,7 @@ export default function App() {
               display: "flex",
               gap: "18px",
               alignItems: "center",
-              marginRight: "200px",
+              marginRight: isMobile ? "0" : "200px",
             }}
           >
             <a
@@ -129,45 +133,72 @@ export default function App() {
             </a>
           </div>
         </header>
+
         <>
           <style>{`
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 29ch;
-      }
-    }
+            @keyframes typing {
+              from {
+                width: 0;
+              }
+              to {
+                width: 29ch;
+              }
+            }
 
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
-    }
+            @keyframes blink {
+              50% {
+                border-color: transparent;
+              }
+            }
 
-    .typing-text {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #000000;
-      animation:
-  typing 3s steps(29, end) infinite,
-  blink 0.8s step-end infinite;
-    }
-  `}</style>
+            .typing-text {
+              overflow: hidden;
+              white-space: nowrap;
+              border-right: 2px solid #000000;
+              animation:
+                typing 3s steps(29, end) infinite,
+                blink 0.8s step-end infinite;
+            }
+
+            .cover-container img.cover-image {
+              transition: all 0.4s ease;
+            }
+
+            .cover-container:hover img.cover-image {
+              filter: brightness(0.7) saturate(1.2) blur(6px);
+            }
+
+            .spotify-hover {
+              opacity: 0;
+              transition: opacity 0.4s ease;
+            }
+
+            .cover-container:hover .spotify-hover {
+              opacity: 1;
+            }
+
+            .video-container video {
+              transition: filter 0.4s ease;
+            }
+
+            .video-container:hover video {
+              filter: blur(6px);
+            }
+          `}</style>
 
           <div
             className="typing-text"
             style={{
               position: "absolute",
-              bottom: "200px",
-              right: "60px",
+              bottom: isMobile ? "120px" : "200px",
+              right: isMobile ? "20px" : "60px",
               color: "#000000",
-              fontSize: "28px",
+              fontSize: isMobile ? "16px" : "28px",
               fontStyle: "italic",
               fontFamily: '"Great Vibes", cursive',
               fontWeight: 500,
               letterSpacing: "1px",
+              maxWidth: isMobile ? "90%" : "none",
             }}
           >
             Music for the hopeless romantics.
@@ -179,7 +210,7 @@ export default function App() {
       <section
         id="home"
         style={{
-          padding: "80px 20px 0px",
+          padding: isMobile ? "60px 20px 0px" : "80px 20px 0px",
           borderTop: "1px solid rgba(255,255,255,0.25)",
           display: "flex",
           flexDirection: "column",
@@ -200,15 +231,17 @@ export default function App() {
             style={{
               display: "flex",
               flexWrap: "wrap",
+              flexDirection: isMobile ? "column" : "row",
               justifyContent: "space-between",
               alignItems: "center",
               gap: "40px",
+              textAlign: isMobile ? "center" : "left",
             }}
           >
             <div style={{ flex: 1, minWidth: "280px" }}>
               <h1
                 style={{
-                  fontSize: "52px",
+                  fontSize: isMobile ? "34px" : "52px",
                   marginBottom: "20px",
                   lineHeight: "1.1",
                 }}
@@ -223,25 +256,6 @@ export default function App() {
                 position: "relative",
               }}
             >
-              <style>{`
-    .cover-container img.cover-image {
-      transition: all 0.4s ease;
-    }
-
-    .cover-container:hover img.cover-image {
-      filter: brightness(0.7) saturate(1.2) blur(6px);
-    }
-
-    .spotify-hover {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .cover-container:hover .spotify-hover {
-      opacity: 1;
-    }
-  `}</style>
-
               <a
                 href="https://open.spotify.com/track/2ipzZklaoCRH1HlrYeXhAJ?si=7bad55340e5a410e"
                 target="_blank"
@@ -252,7 +266,7 @@ export default function App() {
                   src="/intangible.png"
                   alt="Intangible Cover Art"
                   style={{
-                    width: "320px",
+                    width: isMobile ? "260px" : "320px",
                     maxWidth: "85vw",
                     borderRadius: "24px",
                     boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
@@ -269,8 +283,8 @@ export default function App() {
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    width: "70px",
-                    height: "70px",
+                    width: isMobile ? "50px" : "70px",
+                    height: isMobile ? "50px" : "70px",
                     filter: "invert(0)",
                   }}
                 />
@@ -284,9 +298,9 @@ export default function App() {
       <section
         style={{
           width: "100%",
-          marginTop: "120px",
+          marginTop: isMobile ? "80px" : "120px",
           background: "#603cf0",
-          padding: "80px 40px",
+          padding: isMobile ? "60px 20px" : "80px 40px",
           boxSizing: "border-box",
         }}
       >
@@ -298,9 +312,10 @@ export default function App() {
         >
           <h2
             style={{
-              fontSize: "42px",
+              fontSize: isMobile ? "28px" : "42px",
               marginBottom: "30px",
               textAlign: "center",
+              lineHeight: "1.2",
             }}
           >
             INTANGIBLE (OFFICIAL LYRIC VIDEO)
@@ -315,15 +330,6 @@ export default function App() {
               borderRadius: "20px",
             }}
           >
-            <style>{`
-  .video-container video {
-    transition: filter 0.4s ease;
-  }
-
-  .video-container:hover video {
-    filter: blur(6px);
-  }
-`}</style>
             <video
               autoPlay
               muted
@@ -345,16 +351,16 @@ export default function App() {
               style={{
                 position: "absolute",
                 top: "50%",
-                left: "75%",
+                left: "50%",
                 transform: "translate(-50%, -50%)",
                 background: "#000000",
                 color: "#ffffff",
-                padding: "12px 24px",
+                padding: isMobile ? "10px 18px" : "12px 24px",
                 textDecoration: "none",
                 fontWeight: 900,
                 letterSpacing: "2px",
                 borderRadius: "10px",
-                fontSize: "28px",
+                fontSize: isMobile ? "16px" : "28px",
                 border: "2px solid #ffffff",
                 whiteSpace: "nowrap",
               }}
@@ -370,7 +376,7 @@ export default function App() {
         style={{
           width: "100%",
           background: "#000000",
-          padding: "120px 40px 80px",
+          padding: isMobile ? "80px 20px 60px" : "120px 40px 80px",
           boxSizing: "border-box",
           display: "flex",
           justifyContent: "center",
@@ -381,20 +387,22 @@ export default function App() {
             width: "100%",
             maxWidth: "1200px",
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             flexWrap: "wrap",
             justifyContent: "space-between",
             alignItems: "center",
-            gap: "80px",
+            gap: isMobile ? "50px" : "80px",
           }}
         >
-          <div style={{ flex: 1, minWidth: "320px" }}>
+          <div style={{ flex: 1, minWidth: "280px", width: "100%" }}>
             <h2
               style={{
-                fontSize: "72px",
+                fontSize: isMobile ? "42px" : "72px",
                 lineHeight: "1",
                 marginBottom: "50px",
                 color: "#ffffff",
                 fontWeight: 900,
+                textAlign: isMobile ? "center" : "left",
               }}
             >
               GET IN TOUCH!
@@ -413,10 +421,11 @@ export default function App() {
                   padding: "18px 0",
                   marginBottom: "30px",
                   color: "#ffffff",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "18px" : "20px",
                   fontStyle: "italic",
                   fontFamily: '"Great Vibes", cursive',
                   outline: "none",
+                  boxSizing: "border-box",
                 }}
               />
 
@@ -432,10 +441,11 @@ export default function App() {
                   padding: "18px 0",
                   marginBottom: "30px",
                   color: "#ffffff",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "18px" : "20px",
                   fontStyle: "italic",
                   fontFamily: '"Great Vibes", cursive',
                   outline: "none",
+                  boxSizing: "border-box",
                 }}
               />
 
@@ -451,12 +461,14 @@ export default function App() {
                   padding: "18px 0",
                   marginBottom: "50px",
                   color: "#ffffff",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "18px" : "20px",
                   fontStyle: "italic",
                   fontFamily: '"Great Vibes", cursive',
                   outline: "none",
+                  boxSizing: "border-box",
                 }}
               />
+
               <textarea
                 name="message"
                 placeholder="TYPE YOUR MESSAGE..."
@@ -469,11 +481,12 @@ export default function App() {
                   padding: "18px 0",
                   marginBottom: "50px",
                   color: "#ffffff",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "18px" : "20px",
                   fontStyle: "italic",
                   fontFamily: '"Great Vibes", cursive',
                   outline: "none",
                   resize: "vertical",
+                  boxSizing: "border-box",
                 }}
               />
 
@@ -485,7 +498,7 @@ export default function App() {
                   border: "none",
                   background: "#ffffff",
                   color: "#000000",
-                  fontSize: "20px",
+                  fontSize: isMobile ? "18px" : "20px",
                   fontWeight: 700,
                   borderRadius: "10px",
                   cursor: "pointer",
@@ -500,9 +513,10 @@ export default function App() {
           <div
             style={{
               flex: 1,
-              minWidth: "320px",
+              minWidth: "280px",
               display: "flex",
               justifyContent: "center",
+              width: "100%",
             }}
           >
             <img
@@ -510,12 +524,13 @@ export default function App() {
               alt="Sunny Cosmo"
               style={{
                 width: "100%",
-                maxWidth: "450px",
+                maxWidth: isMobile ? "320px" : "450px",
                 borderRadius: "20px",
                 objectFit: "cover",
               }}
             />
           </div>
+
           <footer
             style={{
               background: "#000000",
@@ -532,7 +547,7 @@ export default function App() {
               src="/footer-logo.png"
               alt="Sunny Cosmo Logo"
               style={{
-                height: "55px",
+                height: isMobile ? "45px" : "55px",
                 width: "auto",
                 marginBottom: "20px",
               }}
@@ -627,4 +642,3 @@ export default function App() {
     </div>
   );
 }
-
