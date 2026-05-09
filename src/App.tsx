@@ -523,7 +523,6 @@ export default function App() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              textAlign: "center",
               justifyContent: "center",
               width: "100%",
               textAlign: "center",
