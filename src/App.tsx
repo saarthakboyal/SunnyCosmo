@@ -22,8 +22,8 @@ export default function App() {
           width: "100%",
           height: "100vh",
           backgroundImage: "url('/background.png?v=2')",
-          backgroundSize: "cover",
-          backgroundPosition: isMobile ? "center center" : "center 20%",
+          backgroundSize: isMobile ? "contain" : "cover",
+backgroundPosition: isMobile ? "center top" : "center 20%",
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -35,9 +35,11 @@ export default function App() {
             left: 0,
             width: "100%",
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: isMobile ? "20px" : "25px 50px",
+flexDirection: isMobile ? "column" : "row",
+justifyContent: "space-between",
+alignItems: "center",
+padding: isMobile ? "20px" : "25px 50px",
+gap: isMobile ? "20px" : "0px",
             boxSizing: "border-box",
             flexWrap: "wrap",
             gap: isMobile ? "20px" : "0",
@@ -46,14 +48,14 @@ export default function App() {
           <a
             href="#home"
             style={{
-              marginLeft: isMobile ? "0" : "200px",
+              marginLeft: isMobile ? "0px" : "200px",
             }}
           >
             <img
               src="/logo.png"
               alt="Sunny Cosmo Logo"
               style={{
-                height: isMobile ? "60px" : "82px",
+                height: isMobile ? "64px" : "82px",
                 width: "auto",
                 display: "block",
               }}
@@ -65,7 +67,7 @@ export default function App() {
               display: "flex",
               gap: "18px",
               alignItems: "center",
-              marginRight: isMobile ? "0" : "200px",
+              marginRight: isMobile ? "0px" : "200px",
             }}
           >
             <a
@@ -191,9 +193,10 @@ export default function App() {
             style={{
               position: "absolute",
               bottom: isMobile ? "120px" : "200px",
-              right: isMobile ? "20px" : "60px",
-              color: "#000000",
-              fontSize: isMobile ? "16px" : "28px",
+right: isMobile ? "50%" : "60px",
+transform: isMobile ? "translateX(50%)" : "none",
+fontSize: isMobile ? "16px" : "28px",
+textAlign: "center",
               fontStyle: "italic",
               fontFamily: '"Great Vibes", cursive',
               fontWeight: 500,
@@ -242,6 +245,7 @@ export default function App() {
               <h1
                 style={{
                   fontSize: isMobile ? "34px" : "52px",
+textAlign: isMobile ? "center" : "left",
                   marginBottom: "20px",
                   lineHeight: "1.1",
                 }}
@@ -312,7 +316,7 @@ export default function App() {
         >
           <h2
             style={{
-              fontSize: isMobile ? "28px" : "42px",
+              fontSize: isMobile ? "26px" : "42px",
               marginBottom: "30px",
               textAlign: "center",
               lineHeight: "1.2",
@@ -379,7 +383,9 @@ export default function App() {
           padding: isMobile ? "80px 20px 60px" : "120px 40px 80px",
           boxSizing: "border-box",
           display: "flex",
-          justifyContent: "center",
+flexDirection: isMobile ? "column" : "row",
+flexWrap: "wrap",
+justifyContent: "space-between",
         }}
       >
         <div
@@ -524,7 +530,7 @@ export default function App() {
               alt="Sunny Cosmo"
               style={{
                 width: "100%",
-                maxWidth: isMobile ? "320px" : "450px",
+                maxWidth: isMobile ? "300px" : "450px",
                 borderRadius: "20px",
                 objectFit: "cover",
               }}
@@ -547,7 +553,7 @@ export default function App() {
               src="/footer-logo.png"
               alt="Sunny Cosmo Logo"
               style={{
-                height: isMobile ? "45px" : "55px",
+                height: isMobile ? "42px" : "55px",
                 width: "auto",
                 marginBottom: "20px",
               }}
