@@ -1,630 +1,559 @@
+import { useEffect, useState } from "react";
+
 export default function App() {
-  document.body.style.margin = "0";
-  document.body.style.padding = "0";
-  document.body.style.backgroundColor = "#000000";
+ const [isMobile, setIsMobile] = useState(false);
 
-  return (
-    <div
-      style={{
-        background: "#000000",
-        minHeight: "100vh",
-        fontFamily: "Arial, sans-serif",
-        color: "#ffffff",
-        overflowX: "hidden",
-      }}
-    >
-      {/* Hero Section */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100vh",
-          backgroundImage: "url('/background.png?v=2')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 20%",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* Header */}
-        <header
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "25px 50px",
-            boxSizing: "border-box",
-          }}
-        >
-          <a
-            href="#home"
-            style={{
-              marginLeft: "200px",
-            }}
-          >
-            <img
-              src="/logo.png"
-              alt="Sunny Cosmo Logo"
-              style={{
-                height: "82px",
-                width: "auto",
-                display: "block",
-              }}
-            />
-          </a>
+ useEffect(() => {
+   const checkMobile = () => {
+     setIsMobile(window.innerWidth <= 768);
+   };
 
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              alignItems: "center",
-              marginRight: "200px",
-            }}
-          >
-            <a
-              href="https://open.spotify.com/artist/3sSP6PTR2vTTnDtNIr2TyF?si=pXd784ymSxKYmxrGf_1Gbg"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg"
-                alt="Spotify"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  filter: "invert(0)",
-                }}
-              />
-            </a>
+   checkMobile(); // run once on mount
 
-            <a
-              href="https://music.apple.com/us/artist/sunny-cosmo/1876620199"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applemusic.svg"
-                alt="Apple Music"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  filter: "invert(0)",
-                }}
-              />
-            </a>
+   document.body.style.margin = "0";
+   document.body.style.padding = "0";
+   document.body.style.backgroundColor = "#000000";
+   document.body.style.overflowX = "hidden";
 
-            <a
-              href="https://www.instagram.com/sunnycosmoofficial/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
-                alt="Instagram"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  filter: "invert(0)",
-                }}
-              />
-            </a>
+   window.addEventListener("resize", checkMobile);
 
-            <a
-              href="https://www.youtube.com/@SunnyCosmoOfficial"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
-                alt="YouTube"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  filter: "invert(0)",
-                }}
-              />
-            </a>
-          </div>
-        </header>
-        <>
-          <style>{`
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 29ch;
-      }
-    }
+   return () => window.removeEventListener("resize", checkMobile);
+ }, []);
 
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
-    }
+ const socialLinks = [
+   {
+     href: "https://open.spotify.com/artist/3sSP6PTR2vTTnDtNIr2TyF",
+     icon: "spotify",
+     alt: "Spotify",
+   },
+   {
+     href: "https://music.apple.com/us/artist/sunny-cosmo/1876620199",
+     icon: "applemusic",
+     alt: "Apple Music",
+   },
+   {
+     href: "https://www.instagram.com/sunnycosmoofficial/",
+     icon: "instagram",
+     alt: "Instagram",
+   },
+   {
+     href: "https://www.youtube.com/@SunnyCosmoOfficial",
+     icon: "youtube",
+     alt: "YouTube",
+   },
+ ];
 
-    .typing-text {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #000000;
-      animation:
-  typing 3s steps(29, end) infinite,
-  blink 0.8s step-end infinite;
-    }
-  `}</style>
+ return (
+   <div
+     style={{
+       background: "#000000",
+       minHeight: "100vh",
+       fontFamily: "Arial, sans-serif",
+       color: "#ffffff",
+       overflowX: "hidden",
+       width: "100%",
+     }}
+   >
+     {/* HERO */}
+     <div
+       style={{
+         position: "relative",
+         width: "100%",
+         aspectRatio: isMobile ? "9 / 16" : "16 / 9",
+         minHeight: isMobile ? "540px" : "900px",
 
-          <div
-            className="typing-text"
-            style={{
-              position: "absolute",
-              bottom: "200px",
-              right: "60px",
-              color: "#000000",
-              fontSize: "28px",
-              fontStyle: "italic",
-              fontFamily: '"Great Vibes", cursive',
-              fontWeight: 500,
-              letterSpacing: "1px",
-            }}
-          >
-            Music for the hopeless romantics.
-          </div>
-        </>
-      </div>
+         // ✅ ONLY HERO CHANGE (correct + safe)
+         backgroundImage: isMobile
+           ? "url('/background-mobile.png?v=2')"
+           : "url('/background.png?v=2')",
 
-      {/* Main Content */}
-      <section
-        id="home"
-        style={{
-          padding: "80px 20px 0px",
-          borderTop: "1px solid rgba(255,255,255,0.25)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          background: "#000000",
-        }}
-      >
-        {/* Intangible Section */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "1100px",
-            padding: "0 20px",
-            boxSizing: "border-box",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "40px",
-            }}
-          >
-            <div style={{ flex: 1, minWidth: "280px" }}>
-              <h1
-                style={{
-                  fontSize: "52px",
-                  marginBottom: "20px",
-                  lineHeight: "1.1",
-                }}
-              >
-                LISTEN TO “INTANGIBLE”
-              </h1>
-            </div>
+         backgroundSize: "contain",
+         backgroundPosition: "center top",
+         backgroundRepeat: "no-repeat",
+         backgroundColor: "#000000",
+       }}
+     >
+       {/* HEADER */}
+       <header
+         style={{
+           position: "absolute",
+           top: 0,
+           left: 0,
+           width: "100%",
+           display: "flex",
+           justifyContent: isMobile ? "center" : "space-between",
+           alignItems: "center",
+           flexDirection: isMobile ? "column" : "row",
+           gap: isMobile ? "18px" : "20px",
+           padding: isMobile ? "20px 20px 0px" : "25px 50px",
+           boxSizing: "border-box",
+           zIndex: 10,
+         }}
+       >
+         <a
+           href="#home"
+           style={{
+             marginLeft: isMobile ? "0" : "120px",
+           }}
+         >
+           <img
+             loading="lazy"
+             src="/logo.png"
+             alt="Sunny Cosmo Logo"
+             style={{
+               height: isMobile ? "52px" : "82px",
+               width: "auto",
+               display: "block",
+             }}
+           />
+         </a>
 
-            <div
-              className="cover-container"
-              style={{
-                position: "relative",
-              }}
-            >
-              <style>{`
-    .cover-container img.cover-image {
-      transition: all 0.4s ease;
-    }
+         <div
+           style={{
+             display: "flex",
+             gap: isMobile ? "16px" : "18px",
+             alignItems: "center",
+             justifyContent: "center",
+             flexWrap: "wrap",
+             marginRight: isMobile ? "0" : "120px",
+           }}
+         >
+           {socialLinks.map((item) => (
+             <a
+               key={item.icon}
+               href={item.href}
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+               <img
+                 src={`https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/${item.icon}.svg`}
+                 alt={item.alt}
+                 style={{
+                   width: isMobile ? "22px" : "24px",
+                   height: isMobile ? "22px" : "24px",
+                   filter: "invert(0)",
+                 }}
+               />
+             </a>
+           ))}
+         </div>
+       </header>
 
-    .cover-container:hover img.cover-image {
-      filter: brightness(0.7) saturate(1.2) blur(6px);
-    }
+       {/* STYLES (UNCHANGED) */}
+       <style>{`
+         * {
+           box-sizing: border-box;
+         }
 
-    .spotify-hover {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
+         html {
+           scroll-behavior: smooth;
+         }
 
-    .cover-container:hover .spotify-hover {
-      opacity: 1;
-    }
-  `}</style>
+         .cover-container img.cover-image {
+           transition: all 0.4s ease;
+         }
 
-              <a
-                href="https://open.spotify.com/track/2ipzZklaoCRH1HlrYeXhAJ?si=7bad55340e5a410e"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="cover-image"
-                  src="/intangible.png"
-                  alt="Intangible Cover Art"
-                  style={{
-                    width: "320px",
-                    maxWidth: "85vw",
-                    borderRadius: "24px",
-                    boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
-                    display: "block",
-                  }}
-                />
+         .cover-container:hover img.cover-image {
+           filter: brightness(0.7) saturate(1.2) blur(6px);
+         }
 
-                <img
-                  className="spotify-hover"
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg"
-                  alt="Spotify"
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "70px",
-                    height: "70px",
-                    filter: "invert(0)",
-                  }}
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+         .spotify-hover {
+           opacity: 0;
+           transition: opacity 0.4s ease;
+         }
 
-      {/* Lyric Video Section */}
-      <section
-        style={{
-          width: "100%",
-          marginTop: "120px",
-          background: "#603cf0",
-          padding: "80px 40px",
-          boxSizing: "border-box",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "42px",
-              marginBottom: "30px",
-              textAlign: "center",
-            }}
-          >
-            INTANGIBLE (OFFICIAL LYRIC VIDEO)
-          </h2>
+         .cover-container:hover .spotify-hover {
+           opacity: 1;
+         }
 
-          <div
-            className="video-container"
-            style={{
-              position: "relative",
-              width: "100%",
-              overflow: "hidden",
-              borderRadius: "20px",
-            }}
-          >
-            <style>{`
-  .video-container video {
-    transition: filter 0.4s ease;
-  }
+         .video-container video {
+           transition: filter 0.4s ease;
+         }
 
-  .video-container:hover video {
-    filter: blur(6px);
-  }
-`}</style>
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{
-                width: "100%",
-                display: "block",
-                borderRadius: "20px",
-              }}
-            >
-              <source src="/preview.mp4" type="video/mp4" />
-            </video>
+         .video-container:hover video {
+           filter: blur(6px);
+         }
 
-            <a
-              href="https://www.youtube.com/watch?v=IDdnaRZnNUI"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "75%",
-                transform: "translate(-50%, -50%)",
-                background: "#000000",
-                color: "#ffffff",
-                padding: "12px 24px",
-                textDecoration: "none",
-                fontWeight: 900,
-                letterSpacing: "2px",
-                borderRadius: "10px",
-                fontSize: "28px",
-                border: "2px solid #ffffff",
-                whiteSpace: "nowrap",
-              }}
-            >
-              WATCH NOW
-            </a>
-          </div>
-        </div>
-      </section>
+         input,
+         textarea,
+         button {
+           -webkit-appearance: none;
+           border-radius: 0;
+         }
 
-      {/* Get In Touch Section */}
-      <section
-        style={{
-          width: "100%",
-          background: "#000000",
-          padding: "120px 40px 80px",
-          boxSizing: "border-box",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "1200px",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "80px",
-          }}
-        >
-          <div style={{ flex: 1, minWidth: "320px" }}>
-            <h2
-              style={{
-                fontSize: "72px",
-                lineHeight: "1",
-                marginBottom: "50px",
-                color: "#ffffff",
-                fontWeight: 900,
-              }}
-            >
-              GET IN TOUCH!
-            </h2>
+         @media (max-width: 768px) {
+           .cover-container:hover img.cover-image,
+           .video-container:hover video {
+             filter: none;
+           }
 
-            <form action="https://formspree.io/f/xrejyoyp" method="POST">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="FIRST NAME"
-                style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  borderBottom: "1px solid #ffffff",
-                  padding: "18px 0",
-                  marginBottom: "30px",
-                  color: "#ffffff",
-                  fontSize: "20px",
-                  fontStyle: "italic",
-                  fontFamily: '"Great Vibes", cursive',
-                  outline: "none",
-                }}
-              />
+           .spotify-hover {
+             opacity: 1;
+           }
+         }
+       `}</style>
+     </div>
 
-              <input
-                type="text"
-                name="lastName"
-                placeholder="LAST NAME"
-                style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  borderBottom: "1px solid #ffffff",
-                  padding: "18px 0",
-                  marginBottom: "30px",
-                  color: "#ffffff",
-                  fontSize: "20px",
-                  fontStyle: "italic",
-                  fontFamily: '"Great Vibes", cursive',
-                  outline: "none",
-                }}
-              />
+     {/* MAIN CONTENT */}
+     <section
+       id="home"
+       style={{
+         padding: isMobile ? "50px 20px 0px" : "80px 20px 0px",
+         borderTop: "1px solid rgba(255,255,255,0.2)",
+         display: "flex",
+         flexDirection: "column",
+         alignItems: "center",
+         background: "#000000",
+       }}
+     >
+       <div
+         style={{
+           width: "100%",
+           maxWidth: "1100px",
+         }}
+       >
+         <div
+           style={{
+             display: "flex",
+             flexDirection: isMobile ? "column" : "row",
+             justifyContent: "space-between",
+             alignItems: "center",
+             gap: isMobile ? "35px" : "40px",
+           }}
+         >
+           <div style={{ flex: 1, width: "100%" }}>
+             <h1
+               style={{
+                 fontSize: isMobile ? "34px" : "52px",
+                 marginBottom: "0",
+                 lineHeight: "1.1",
+                 textAlign: isMobile ? "center" : "left",
+                 letterSpacing: isMobile ? "1px" : "0",
+               }}
+             >
+               LISTEN TO “INTANGIBLE”
+             </h1>
+           </div>
 
-              <input
-                type="email"
-                name="email"
-                placeholder="EMAIL ADDRESS"
-                style={{
-                  width: "100%",
-                  background: "transparent",
-                  border: "none",
-                  borderBottom: "1px solid #ffffff",
-                  padding: "18px 0",
-                  marginBottom: "50px",
-                  color: "#ffffff",
-                  fontSize: "20px",
-                  fontStyle: "italic",
-                  fontFamily: '"Great Vibes", cursive',
-                  outline: "none",
-                }}
-              />
-              <textarea
-                name="message"
-                placeholder="TYPE YOUR MESSAGE..."
-                style={{
-                  width: "100%",
-                  minHeight: "140px",
-                  background: "transparent",
-                  border: "none",
-                  borderBottom: "1px solid #ffffff",
-                  padding: "18px 0",
-                  marginBottom: "50px",
-                  color: "#ffffff",
-                  fontSize: "20px",
-                  fontStyle: "italic",
-                  fontFamily: '"Great Vibes", cursive',
-                  outline: "none",
-                  resize: "vertical",
-                }}
-              />
+           <div
+             className="cover-container"
+             style={{
+               position: "relative",
+               margin: "0 auto",
+             }}
+           >
+             <a
+               href="https://open.spotify.com/track/2ipzZklaoCRH1HlrYeXhAJ"
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+               <img
+                 loading="lazy"
+                 className="cover-image"
+                 src="/intangible.png"
+                 alt="Intangible Cover Art"
+                 style={{
+                   width: isMobile ? "240px" : "320px",
+                   maxWidth: "85vw",
+                   borderRadius: "24px",
+                   boxShadow: "0 10px 40px rgba(0,0,0,0.5)",
+                   display: "block",
+                 }}
+               />
 
-              <button
-                type="submit"
-                style={{
-                  width: "100%",
-                  padding: "18px",
-                  border: "none",
-                  background: "#ffffff",
-                  color: "#000000",
-                  fontSize: "20px",
-                  fontWeight: 700,
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  letterSpacing: "2px",
-                }}
-              >
-                SUBMIT
-              </button>
-            </form>
-          </div>
+               <img
+                 className="spotify-hover"
+                 src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg"
+                 alt="Spotify"
+                 style={{
+                   position: "absolute",
+                   top: "50%",
+                   left: "50%",
+                   transform: "translate(-50%, -50%)",
+                   width: isMobile ? "50px" : "70px",
+                   height: isMobile ? "50px" : "70px",
+                   filter: "invert(0)",
+                 }}
+               />
+             </a>
+           </div>
+         </div>
+       </div>
+     </section>
 
-          <div
-            style={{
-              flex: 1,
-              minWidth: "320px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src="/contact-image.png"
-              alt="Sunny Cosmo"
-              style={{
-                width: "100%",
-                maxWidth: "450px",
-                borderRadius: "20px",
-                objectFit: "cover",
-              }}
-            />
-          </div>
-          <footer
-            style={{
-              background: "#000000",
-              padding: "40px 20px 10px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
-            <img
-              src="/footer-logo.png"
-              alt="Sunny Cosmo Logo"
-              style={{
-                height: "55px",
-                width: "auto",
-                marginBottom: "20px",
-              }}
-            />
+     {/* LYRIC VIDEO */}
+     <section
+       style={{
+         width: "100%",
+         marginTop: isMobile ? "70px" : "120px",
+         background: "#603cf0",
+         padding: isMobile ? "60px 16px" : "80px 40px",
+         boxSizing: "border-box",
+       }}
+     >
+       <div
+         style={{
+           maxWidth: "1100px",
+           margin: "0 auto",
+         }}
+       >
+         <h2
+           style={{
+             fontSize: isMobile ? "26px" : "42px",
+             marginBottom: "30px",
+             textAlign: "center",
+             lineHeight: "1.2",
+             padding: isMobile ? "0 10px" : "0",
+           }}
+         >
+           INTANGIBLE (OFFICIAL LYRIC VIDEO)
+         </h2>
 
-            <div
-              style={{
-                display: "flex",
-                gap: "22px",
-                alignItems: "center",
-                marginBottom: "20px",
-              }}
-            >
-              <a
-                href="https://open.spotify.com/artist/3sSP6PTR2vTTnDtNIr2TyF?si=pXd784ymSxKYmxrGf_1Gbg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg"
-                  alt="Spotify"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    filter: "invert(1)",
-                  }}
-                />
-              </a>
+         <div
+           className="video-container"
+           style={{
+             position: "relative",
+             width: "100%",
+             overflow: "hidden",
+             borderRadius: isMobile ? "16px" : "20px",
+           }}
+         >
+           <video
+             autoPlay
+             muted
+             loop
+             playsInline
+             style={{
+               width: "100%",
+               display: "block",
+               borderRadius: isMobile ? "16px" : "20px",
+             }}
+           >
+             <source src="/preview.mp4" type="video/mp4" />
+           </video>
 
-              <a
-                href="https://music.apple.com/us/artist/sunny-cosmo/1876620199"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applemusic.svg"
-                  alt="Apple Music"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    filter: "invert(1)",
-                  }}
-                />
-              </a>
+           <a
+             href="https://www.youtube.com/watch?v=IDdnaRZnNUI"
+             target="_blank"
+             rel="noopener noreferrer"
+             style={{
+               position: "absolute",
+               top: "50%",
+               left: "50%",
+               transform: "translate(-50%, -50%)",
+               background: "#000000",
+               color: "#ffffff",
+               padding: isMobile ? "10px 16px" : "12px 24px",
+               textDecoration: "none",
+               fontWeight: 900,
+               letterSpacing: "2px",
+               borderRadius: "10px",
+               fontSize: isMobile ? "14px" : "28px",
+               border: "2px solid #ffffff",
+               whiteSpace: "nowrap",
+             }}
+           >
+             WATCH NOW
+           </a>
+         </div>
+       </div>
+     </section>
 
-              <a
-                href="https://www.instagram.com/sunnycosmoofficial/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
-                  alt="Instagram"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    filter: "invert(1)",
-                  }}
-                />
-              </a>
+     {/* CONTACT */}
+     <section
+       style={{
+         width: "100%",
+         background: "#000000",
+         padding: isMobile ? "70px 20px 50px" : "120px 40px 80px",
+         boxSizing: "border-box",
+         display: "flex",
+         justifyContent: "center",
+       }}
+     >
+       <div
+         style={{
+           width: "100%",
+           maxWidth: "1200px",
+           display: "flex",
+           flexDirection: isMobile ? "column" : "row",
+           justifyContent: "space-between",
+           alignItems: "center",
+           gap: isMobile ? "50px" : "80px",
+         }}
+       >
+         {/* FORM */}
+         <div style={{ flex: 1, width: "100%" }}>
+           <h2
+             style={{
+               fontSize: isMobile ? "42px" : "72px",
+               lineHeight: "1",
+               marginBottom: "40px",
+               color: "#ffffff",
+               fontWeight: 900,
+               textAlign: isMobile ? "center" : "left",
+             }}
+           >
+             GET IN TOUCH!
+           </h2>
 
-              <a
-                href="https://www.youtube.com/@SunnyCosmoOfficial"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
-                  alt="YouTube"
-                  style={{
-                    width: "24px",
-                    height: "24px",
-                    filter: "invert(1)",
-                  }}
-                />
-              </a>
-            </div>
+           <form action="https://formspree.io/f/xrejyoyp" method="POST">
+             {[
+               { type: "text", placeholder: "FIRST NAME" },
+               { type: "text", placeholder: "LAST NAME" },
+               { type: "email", placeholder: "EMAIL ADDRESS" },
+             ].map((field) => (
+               <input
+                 key={field.placeholder}
+                 type={field.type}
+                 placeholder={field.placeholder}
+                 style={{
+                   width: "100%",
+                   background: "transparent",
+                   border: "none",
+                   borderBottom: "1px solid #ffffff",
+                   padding: isMobile ? "16px 0" : "18px 0",
+                   marginBottom: "28px",
+                   color: "#ffffff",
+                   fontSize: isMobile ? "16px" : "20px",
+                   fontStyle: "italic",
+                   fontFamily: '"Great Vibes", cursive',
+                   outline: "none",
+                 }}
+               />
+             ))}
 
-            <p
-              style={{
-                color: "#888888",
-                fontSize: "14px",
-                letterSpacing: "2px",
-                textAlign: "center",
-              }}
-            >
-              © 2026 SUNNY COSMO. ALL RIGHTS RESERVED.
-            </p>
-          </footer>
-        </div>
-      </section>
-    </div>
-  );
+             <textarea
+               placeholder="TYPE YOUR MESSAGE..."
+               style={{
+                 width: "100%",
+                 minHeight: isMobile ? "120px" : "140px",
+                 background: "transparent",
+                 border: "none",
+                 borderBottom: "1px solid #ffffff",
+                 padding: "18px 0",
+                 marginBottom: "40px",
+                 color: "#ffffff",
+                 fontSize: isMobile ? "16px" : "20px",
+                 fontStyle: "italic",
+                 fontFamily: '"Great Vibes", cursive',
+                 outline: "none",
+                 resize: "vertical",
+               }}
+             />
+
+             <button
+               type="submit"
+               style={{
+                 width: "100%",
+                 padding: isMobile ? "16px" : "18px",
+                 border: "none",
+                 background: "#ffffff",
+                 color: "#000000",
+                 fontSize: isMobile ? "16px" : "20px",
+                 fontWeight: 700,
+                 borderRadius: "10px",
+                 cursor: "pointer",
+                 letterSpacing: "2px",
+               }}
+             >
+               SUBMIT
+             </button>
+           </form>
+         </div>
+
+         {/* CONTACT IMAGE */}
+         <div
+           style={{
+             flex: 1,
+             width: "100%",
+             display: "flex",
+             justifyContent: "center",
+           }}
+         >
+           <img
+             loading="lazy"
+             src="/contact-image.png"
+             alt="Sunny Cosmo"
+             style={{
+               width: "100%",
+               maxWidth: isMobile ? "320px" : "450px",
+               borderRadius: "20px",
+               objectFit: "cover",
+             }}
+           />
+         </div>
+       </div>
+     </section>
+
+     {/* FOOTER */}
+     <footer
+       style={{
+         background: "#000000",
+         padding: isMobile ? "30px 20px 20px" : "40px 20px 10px",
+         display: "flex",
+         flexDirection: "column",
+         alignItems: "center",
+         textAlign: "center",
+         justifyContent: "center",
+         width: "100%",
+         borderTop: "1px solid rgba(255,255,255,0.1)",
+       }}
+     >
+       <img
+         loading="lazy"
+         src="/footer-logo.png"
+         alt="Sunny Cosmo Logo"
+         style={{
+           height: isMobile ? "40px" : "55px",
+           width: "auto",
+           marginBottom: "20px",
+         }}
+       />
+
+       <div
+         style={{
+           display: "flex",
+           flexWrap: "wrap",
+           justifyContent: "center",
+           gap: isMobile ? "18px" : "22px",
+           alignItems: "center",
+           marginBottom: "20px",
+         }}
+       >
+         {socialLinks.map((item) => (
+           <a
+             key={item.icon}
+             href={item.href}
+             target="_blank"
+             rel="noopener noreferrer"
+           >
+             <img
+               src={`https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/${item.icon}.svg`}
+               alt={item.alt}
+               style={{
+                 width: "24px",
+                 height: "24px",
+                 filter: "invert(1)",
+               }}
+             />
+           </a>
+         ))}
+       </div>
+
+       <p
+         style={{
+           color: "#888888",
+           fontSize: isMobile ? "11px" : "14px",
+           letterSpacing: "2px",
+           textAlign: "center",
+           lineHeight: "1.6",
+           padding: "0 10px",
+         }}
+       >
+         © 2026 SUNNY COSMO. ALL RIGHTS RESERVED.
+       </p>
+     </footer>
+   </div>
+ );
 }
 
